@@ -2,15 +2,20 @@ package study.querydsl;
 
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import jakarta.persistence.EntityManager;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Commit;
 import org.springframework.transaction.annotation.Transactional;
 import study.querydsl.entity.Hello;
 import study.querydsl.entity.QHello;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 @SpringBootTest
 @Transactional
+@Commit
 class QuerydslApplicationTests {
 	@Autowired
 	EntityManager em;
@@ -23,8 +28,8 @@ class QuerydslApplicationTests {
 		JPAQueryFactory query = new JPAQueryFactory(em);
 		QHello qHello = new QHello("h");
 
-		query.selectFrom(qHello).fetchOne();
-
+		Hello res = query.selectFrom(qHello).fetchOne();
+		assertThat(res).isEqualTo(hello);
 	}
 
 }
