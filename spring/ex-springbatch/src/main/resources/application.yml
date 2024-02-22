@@ -1,0 +1,12 @@
+spring:
+  batch:
+    jdbc:
+      initialize-schema: always
+    job:
+      name: batchJob
+  datasource:
+    hikari:
+      jdbc-url: jdbc:h2:tcp://localhost/~/Study/Practice/spring/springbatch
+      username: sa
+      password:
+      driver-class-name: org.h2.Driver
