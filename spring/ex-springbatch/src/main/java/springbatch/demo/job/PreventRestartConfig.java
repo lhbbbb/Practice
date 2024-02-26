@@ -18,8 +18,8 @@ public class PreventRestartConfig {
     private final PlatformTransactionManager transactionManager;
 
     @Bean
-    public Job PreventRestartJob() {
-        return new JobBuilder("PreventRestartJob", jobRepository)
+    public Job preventRestartJob() {
+        return new JobBuilder("preventRestartJob", jobRepository)
                 .start(preventStep1())
                 .next(preventStep2())
                 .preventRestart()
