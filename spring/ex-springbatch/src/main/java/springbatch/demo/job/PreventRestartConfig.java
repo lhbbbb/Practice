@@ -18,17 +18,17 @@ public class PreventRestartConfig {
     private final PlatformTransactionManager transactionManager;
 
     @Bean
-    public Job batchJob() {
-        return new JobBuilder("batchJob", jobRepository)
-                .start(step1())
-                .next(step2())
+    public Job PreventRestartJob() {
+        return new JobBuilder("PreventRestartJob", jobRepository)
+                .start(preventStep1())
+                .next(preventStep2())
                 .preventRestart()
                 .build();
     }
 
     @Bean
-    public Step step1() {
-        return new StepBuilder("step1", jobRepository)
+    public Step preventStep1() {
+        return new StepBuilder("preventStep1", jobRepository)
                 .tasklet(((contribution, chunkContext) -> {
                     System.out.println(" >>> step1 executed");
                     return RepeatStatus.FINISHED;
@@ -37,8 +37,8 @@ public class PreventRestartConfig {
     }
 
     @Bean
-    public Step step2() {
-        return new StepBuilder("step2", jobRepository)
+    public Step preventStep2() {
+        return new StepBuilder("preventStep2", jobRepository)
                 .tasklet(((contribution, chunkContext) -> {
                     throw new RuntimeException("step2 was failed");
 //                    System.out.println(" >>> step2 executed");

@@ -4,6 +4,7 @@ spring:
       initialize-schema: always
     job:
       name: batchJob
+#      enabled: false
   datasource:
     hikari:
       jdbc-url: jdbc:h2:tcp://localhost/~/Study/Practice/spring/springbatch
